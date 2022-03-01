@@ -55,6 +55,6 @@ for i in range(0, 16):
         + math.sin(i * math.pi/4)
     )
 
-
-test = DiscreteFourierTransform(xk, 8)
-print(test)
+if __name__ == "main":
+    test = DiscreteFourierTransform(xk, 8)
+    print(test)

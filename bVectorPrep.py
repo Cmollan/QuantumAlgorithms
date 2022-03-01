@@ -243,26 +243,26 @@ def AddEncoding(circuit, start_qubit, stop_qubit, b):
     ## Swapping MSB to LSB because qiskit
     quantum_register_swap(circuit, start_qubit, stop_qubit)
 
+if __name__ == "main":
+    # test = np.array([1, 1, 1, 1])
 
-# test = np.array([1, 1, 1, 1])
+    test = np.array([2, 4, 3, 1])
 
-test = np.array([2, 4, 3, 1])
+    # test = np.array([1, 5, 4, 3, 1, 2, 7, 8])
 
-# test = np.array([1, 5, 4, 3, 1, 2, 7, 8])
+    # test = np.array([58, 65, 17, 54])
 
-# test = np.array([58, 65, 17, 54])
+    # test = np.array([85, 87, 117, 76, 110, 140, 104, 87,  68,  76, 102, 78, 56, 48, 97, 74])
 
-# test = np.array([85, 87, 117, 76, 110, 140, 104, 87,  68,  76, 102, 78, 56, 48, 97, 74])
+    prob = AmplitudeEncode(test)**2
+    qc = QuantumCircuit(2)
+    AddEncoding(qc, 0, 1, test)
+    qc.measure_all()
+    qc.draw('mpl')
 
-prob = AmplitudeEncode(test)**2
-qc = QuantumCircuit(2)
-AddEncoding(qc, 0, 1, test)
-qc.measure_all()
-qc.draw('mpl')
-
-backend = Aer.get_backend('qasm_simulator')
-shots = 262144
-results = execute(qc, backend=backend, shots=shots).result()
-answer = results.get_counts()
-plot_histogram(answer)
+    backend = Aer.get_backend('qasm_simulator')
+    shots = 262144
+    results = execute(qc, backend=backend, shots=shots).result()
+    answer = results.get_counts()
+    plot_histogram(answer)
 
